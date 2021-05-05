@@ -13,3 +13,4 @@ else
 fi
 
 source ./oe-init-build-env
+exec /bin/bash
