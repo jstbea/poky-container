@@ -8,7 +8,7 @@ else
     /usr/bin/git clone git://git.yoctoproject.org/poky .
 
     ##### CUSTOM SETUP GOES HERE #####
-    
+    /usr/bin/git checkout tags/morty-16.0.4 -b bea-morty
     ##################################
 fi
 
