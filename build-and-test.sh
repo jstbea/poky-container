@@ -21,7 +21,11 @@ if [ "${ENGINE_CMD}" = "" ]; then
     ENGINE_CMD="docker"
 fi
 
-${ENGINE_CMD} build --build-arg BASE_DISTRO=${BASE_DISTRO} --pull -t ${REPO}:${BASE_DISTRO} .
+# Set docker tag as branch name
+IFS='/'
+read -ra REF <<< ${GITHUB_REF}
+TAG="${REF[-1]}"
+${ENGINE_CMD} build --build-arg BASE_DISTRO=${BASE_DISTRO} --pull -t "${REPO}:${TAG}" .
 
 if command -v annotate-output; then
     ANNOTATE_OUTPUT=annotate-output

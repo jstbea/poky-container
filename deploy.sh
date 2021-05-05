@@ -23,16 +23,17 @@ if [ "${ENGINE_CMD}" = "" ]; then
     ENGINE_CMD="docker"
 fi
 
+# Set docker tag as branch name
+IFS='/'
+read -ra REF <<< ${GITHUB_REF}
+TAG="${REF[-1]}"
+
 # Don't deploy on pull requests because it could just be junk code that won't
 # get merged
-if ([ "${GITHUB_EVENT_NAME}" = "push" ] || [ "${GITHUB_EVENT_NAME}" = "workflow_dispatch" ]) && [ "${GITHUB_REF}" = "refs/heads/master" ]; then
+if ([ "${GITHUB_EVENT_NAME}" = "push" ] || [ "${GITHUB_EVENT_NAME}" = "workflow_dispatch" ]); then
     echo $DOCKER_PASSWORD | ${ENGINE_CMD} login -u $DOCKER_USERNAME --password-stdin
-    ${ENGINE_CMD} push ${REPO}:${BASE_DISTRO}
+    ${ENGINE_CMD} push "${REPO}:${TAG}"
 
-    if [ "${DEFAULT_DISTRO}" = "${BASE_DISTRO}" ]; then
-        ${ENGINE_CMD} tag ${REPO}:${BASE_DISTRO} ${REPO}:latest
-        ${ENGINE_CMD} push ${REPO}:latest
-    fi
 else
     echo "Not pushing since build was triggered by a pull request."
 fi

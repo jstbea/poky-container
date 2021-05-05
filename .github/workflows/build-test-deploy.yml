@@ -1,8 +1,6 @@
 name: poky-container build and test
 on:
   push:
-    branches:
-      - master
   pull_request:
 
   # Allow for manually running
@@ -15,7 +13,7 @@ jobs:
       fail-fast: false
     env:
       BASE_DISTRO: ubuntu-20.04
-      REPO: tlangohr/sigmadev
+      REPO: tlangohr/yoctodev
       DEFAULT_DISTRO: ubuntu-20.04
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
