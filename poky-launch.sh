@@ -15,7 +15,7 @@
 workdir=$1
 shift
 cd $workdir
-bash -c  /usr/bin/sigma-init.sh
+bash -c  /usr/bin/custom-init.sh
 if [ $# -gt 0 ]; then
     exec "$@"
 else
