@@ -1,7 +1,4 @@
 #!/bin/bash
-
-# run-dumb-init-check.sh
-#
 # Copyright (C) 2016 Intel Corporation
 #
 # This program is free software; you can redistribute it and/or modify
@@ -16,20 +13,19 @@
 # You should have received a copy of the GNU General Public License along
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+set -e
 
-# This verifies that dumb-init is running as the correct user and is running
-# what we expected.
-
-username="usersetup"
-username_width=${#username}
-expected='1 usersetup /usr/bin/dumb-init -- /usr/bin/poky-entry.py --workdir /workdir /workdir/run-dumb-init-check.sh'
-actual=`ps -w -w h -C dumb-init -o pid:1,user:$username_width,args`
-
-if [ "$expected" != "$actual" ]; then
-    printf "expected dumb-init not found\n"
-    printf "expected:\n%s\n" "$expected"
-    printf "actual:\n%s\n" "$actual"
-    printf "all:\n"
-    ps -w -w -A -o pid,user:$username_width,args
-    exit 1
+# Allow the user to specify another command to use for building such as podman.
+if [ "${ENGINE_CMD}" = "" ]; then
+    ENGINE_CMD="docker"
 fi
+
+# Set docker tag as branch name
+IFS='/'
+read -ra REF <<< ${GITHUB_REF}
+TAG="${REF[-1]}"
+
+${ENGINE_CMD} build --build-arg BASE_DISTRO=${BASE_DISTRO} --pull -t "${REPO}:${TAG}" .
+
+rm -f $DOCKERFILE
