@@ -26,7 +26,7 @@ ADD https://raw.githubusercontent.com/crops/extsdk-container/master/restrict_use
         https://raw.githubusercontent.com/crops/extsdk-container/master/restrict_groupadd.sh \
         https://raw.githubusercontent.com/crops/extsdk-container/master/usersetup.py \
         /usr/bin/
-COPY distro-entry.sh poky-entry.py poky-launch.sh /usr/bin/
+COPY distro-entry.sh poky-entry.py poky-launch.sh sigma-init.sh /usr/bin/
 COPY sudoers.usersetup /etc/
 
 # For ubuntu, do not use dash.
@@ -45,6 +45,7 @@ RUN userdel -r yoctouser && \
     chmod 755 /usr/bin/usersetup.py \
         /usr/bin/poky-entry.py \
         /usr/bin/poky-launch.sh \
+        /usr/bin/sigma-init.sh \
         /usr/bin/restrict_groupadd.sh \
         /usr/bin/restrict_useradd.sh && \
     echo "#include /etc/sudoers.usersetup" >> /etc/sudoers
