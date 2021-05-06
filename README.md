@@ -1,6 +1,6 @@
 Usage
 ========================
-docker run --rm -it -v /DATA_DIR/:/workdir -v $HOME/.ssh:/home/pokyuser/.ssh tlangohr/yoctodev:TAG --workdir=/workdir
+docker run --rm -it -v /DATA_DIR/:/workdir -v $HOME/.ssh:/home/pokyuser/.ssh tlangohr/yoctodev:sigma --workdir=/workdir
 
 Poky Container
 ========================
