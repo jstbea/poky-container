@@ -1,3 +1,7 @@
+Usage
+========================
+docker run --rm -it -v /DATA_DIR/:/workdir -v $HOME/.ssh:/home/pokyuser/.ssh tlangohr/yoctodev:TAG --workdir=/workdir
+
 Poky Container
 ========================
 This repo is to create an image that is able to run bitbake/poky. The main
