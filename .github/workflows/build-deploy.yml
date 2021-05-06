@@ -12,9 +12,9 @@ jobs:
     strategy:
       fail-fast: false
     env:
-      BASE_DISTRO: ubuntu-20.04
+      BASE_DISTRO: ubuntu-18.04
       REPO: tlangohr/yoctodev
-      DEFAULT_DISTRO: ubuntu-20.04
+      DEFAULT_DISTRO: ubuntu-18.04
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
