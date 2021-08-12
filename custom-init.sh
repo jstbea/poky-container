@@ -10,6 +10,8 @@ else
     git clone git://git.yoctoproject.org/poky . -b morty
 
     ############### CUSTOM SETUP GOES HERE ###############
+    ### Checkout the correct poky comit for Sigma ABI compatibility
+    git checkout 78890ea22750804e3e9113e76f7ca3d7234c8342
 
     /bin/echo "Cloning BEA's meta-layers"
     /usr/bin/git clone ssh://git@ssh.dev.azure.com/v3/BEA-RD-Firmware/E363_Sigma/meta-bea.git
