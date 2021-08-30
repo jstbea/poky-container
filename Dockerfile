@@ -35,10 +35,15 @@ RUN which dash &> /dev/null && (\
     DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash) || \
     echo "Skipping dash reconfigure (not applicable)"
 
+RUN apt-get update
+RUN apt-get install -y curl
+
 # We remove the user because we add a new one of our own.
 # The usersetup user is solely for adding a new user that has the same uid,
 # as the workspace. 70 is an arbitrary *low* unused uid on debian.
 RUN userdel -r yoctouser && \
+    mkdir /home/pokyuser && \
+    chmod o+w /home/pokyuser && \
     mkdir /home/yoctouser && \
     groupadd -g 70 usersetup && \
     useradd -N -m -u 70 -g 70 usersetup && \
